@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="This is a corner for myself.">
+      <link href="iframe.css" rel="stylesheet" type="text/css" media="all">
+      <link rel="icon" type="image/png">
+       
+       <script type='text/javascript'>
+        //<![CDATA[
+        var rate = 50;
+        if (document.getElementById)
+            window.onerror = new Function("return true")
+
+        var objActive; // The object which event occured in 
+        var act = 0; // Flag during the action 
+        var elmH = 0; // Hue 
+        var elmS = 128; // Saturation 
+        var elmV = 255; // Value 
+        var clrOrg; // A color before the change 
+        var TimerID; // Timer ID
+        if (document.all) {
+            document.onmouseover = doRainbowAnchor;
+            document.onmouseout = stopRainbowAnchor;
+        } else if (document.getElementById) {
+            document.captureEvents(Event.MOUSEOVER | Event.MOUSEOUT);
+            document.onmouseover = Mozilla_doRainbowAnchor;
+            document.onmouseout = Mozilla_stopRainbowAnchor;
+        }
+
+        function doRainbow(obj) {
+            if (act == 0) {
+                act = 1;
+                if (obj)
+                    objActive = obj;
+                else
+                    objActive = event.srcElement;
+                clrOrg = objActive.style.color;
+                TimerID = setInterval("ChangeColor()", 100);
+            }
+        }
+
+        function stopRainbow() {
+            if (act) {
+                objActive.style.color = clrOrg;
+                clearInterval(TimerID);
+                act = 0;
+            }
+        }
+
+        function doRainbowAnchor() {
+            if (act == 0) {
+                var obj = event.srcElement;
+                while (obj.tagName != 'A' && obj.tagName != 'BODY') {
+                    obj = obj.parentElement;
+                    if (obj.tagName == 'A' || obj.tagName == 'BODY')
+                        break;
+                }
+                if (obj.tagName == 'A' && obj.href != '') {
+                    objActive = obj;
+                    act = 1;
+                    clrOrg = objActive.style.color;
+                    TimerID = setInterval("ChangeColor()", 100);
+                }
+            }
+        }
+
+        function stopRainbowAnchor() {
+            if (act) {
+                if (objActive.tagName == 'A') {
+                    objActive.style.color = clrOrg;
+                    clearInterval(TimerID);
+                    act = 0;
+                }
+            }
+        }
+
+        function Mozilla_doRainbowAnchor(e) {
+            if (act == 0) {
+                obj = e.target;
+                while (obj.nodeName != 'A' && obj.nodeName != 'BODY') {
+                    obj = obj.parentNode;
+                    if (obj.nodeName == 'A' || obj.nodeName == 'BODY')
+                        break;
+                }
+                if (obj.nodeName == 'A' && obj.href != '') {
+                    objActive = obj;
+                    act = 1;
+                    clrOrg = obj.style.color;
+                    TimerID = setInterval("ChangeColor()", 100);
+                }
+            }
+        }
+
+        function Mozilla_stopRainbowAnchor(e) {
+            if (act) {
+                if (objActive.nodeName == 'A') {
+                    objActive.style.color = clrOrg;
+                    clearInterval(TimerID);
+                    act = 0;
+                }
+            }
+        }
+
+        function ChangeColor() {
+            objActive.style.color = makeColor();
+        }
+
+        function makeColor() {
+            // Don't you think Color Gamut to look like Rainbow?
+            // HSVtoRGB 
+            if (elmS == 0) {
+                elmR = elmV;
+                elmG = elmV;
+                elmB = elmV;
+            } else {
+                t1 = elmV;
+                t2 = (255 - elmS) * elmV / 255;
+                t3 = elmH % 60;
+                t3 = (t1 - t2) * t3 / 60;
+                if (elmH < 60) {
+                    elmR = t1;
+                    elmB = t2;
+                    elmG = t2 + t3;
+                } else if (elmH < 120) {
+                    elmG = t1;
+                    elmB = t2;
+                    elmR = t1 - t3;
+                } else if (elmH < 180) {
+                    elmG = t1;
+                    elmR = t2;
+                    elmB = t2 + t3;
+                } else if (elmH < 240) {
+                    elmB = t1;
+                    elmR = t2;
+                    elmG = t1 - t3;
+                } else if (elmH < 300) {
+                    elmB = t1;
+                    elmG = t2;
+                    elmR = t2 + t3;
+                } else if (elmH < 360) {
+                    elmR = t1;
+                    elmG = t2;
+                    elmB = t1 - t3;
+                } else {
+                    elmR = 0;
+                    elmG = 0;
+                    elmB = 0;
+                }
+            }
+            elmR = Math.floor(elmR).toString(16);
+            elmG = Math.floor(elmG).toString(16);
+            elmB = Math.floor(elmB).toString(16);
+            if (elmR.length == 1) elmR = "0" + elmR;
+            if (elmG.length == 1) elmG = "0" + elmG;
+            if (elmB.length == 1) elmB = "0" + elmB
+            elmH = elmH + rate;
+            if (elmH >= 360)
+                elmH = 0;
+            return '#' + elmR + elmG + elmB;
+        }
+        //]]>
+    </script>
+       
+       
+    </head> 
+    <body>
+
+                    <div class="fun">
+          <br>
+                    I want to feature this before going into HTML but if you want a good commission resource if you've never commissioned anyone before OR you're an artist looking to educate yourself, here's a good page on it! <br><br>
+                    <center>
+                        <img src="https://web.archive.org/web/20091027002350/http://us.geocities.com/artistikweapons/mail.gif" style=""><br>
+
+                        <a href="https://www.ryanhammett.com/creative-and-commission-resources/" target="_blank" rel="noopener noreferrer">
+                            <h2>Creative and Commission Resources</h2>
+                        </a>
+                    </center>
+                    <br><br>
+
+                    <img src="flair/divider.png" style="">
+                    <br><br>
+
+                    <br> <br> If you are intimidated by html/css, it's not as bad as you might be picturing. During the geocities/angelfire days in early web, literal 14 year olds were making websites. We are just so used to web builders and social media making everything as minimal as possible, therefore, extremely easy. <br><br>
+                    So believe me when I say it's possible that, you too, can make your own site! <br><br>
+                    I highly reccommend everyone to create a personalized web presence other than social media. Full control of your internet space is getting harder to find these days. With neocities (and other website hosts), your freedom is endless. Do not take it for granted, use it while it lasts! We don't know what will become of the internet in the future. <br> <br>
+
+                    <center><img src="https://64.media.tumblr.com/90da199f4b8c5c4273cbf273067c1d12/a9d578e62b0905a0-94/s75x75_c1/296430ae8a52114be74b6577566b073760a36e4b.gif" style=""></center>
+
+                    <center>
+                        <h2><b><img src="https://64.media.tumblr.com/1665f53a2a2dfe496014e458efe0cbc4/a393e4a5d50ae0eb-37/s75x75_c1/71b196504c079aa1c5a48562be94002316afa126.gif" style="">&nbsp; HELPFUL HTML/CSS RESOURCES </b></h2>
+                    </center> <br>
+                    <a href="https://webguide.neocities.org" target="_blank" rel="noopener noreferrer">
+                        <h2>HTML/CSS WEBGUIDE</h2>
+                    </a> - A very basic webguide, and I MEAN basic. It won't get down to the specifics but its a good introduction!<br>
+                    <a href="https://neothemes.neocities.org" target="_blank" rel="noopener noreferrer">
+                        <h2>NEOTHEMES LAYOUTS</h2>
+                    </a> - Neothemes offers layouts that are very customizable and are also very intuitive to use. It works as a good reference if you are starting from scratch.<br>
+                    <a href="https://www.w3schools.com" target="_blank" rel="noopener noreferrer">
+                        <h2>W3SCHOOLS</h2>
+                    </a> - This has been, by far, the most useful site to get myself familiar with html/css. I haven't been let down by its information and you will find yourself referring to it regardless. <br>
+                    <a href="https://htmlcheatsheet.com" target="_blank" rel="noopener noreferrer">
+                        <h2>HTML CHEAT SHEET</h2>
+                    </a> - Another useful glossary of sorts. If you forget how to do a specific effect or action, heres a good spot that has it all in one sheet. <br>
+                    <a href="https://html-css-js.com/html/generator/" target="_blank" rel="noopener noreferrer">
+                        <h2>HTML GENERATOR</h2>
+                    </a> - This generates specific actions in HTML so that you don't have to write it all by yourself and you can plug them in. I haven't used this before but I wish I did. Woulda' saved me a lot of time. <br><br>
+
+                    <center>
+                        <h2><b><img src="https://64.media.tumblr.com/1665f53a2a2dfe496014e458efe0cbc4/a393e4a5d50ae0eb-37/s75x75_c1/71b196504c079aa1c5a48562be94002316afa126.gif" style="">&nbsp; SOFTWARE </b></h2>
+                    </center> <br><br>
+
+                    <a href="https://code.visualstudio.com" target="_blank" rel="noopener noreferrer">
+                        <h2>VSCODE</h2>
+                    </a> - This software lets you code in all kinds of languages but you can code HTML/CSS/javascript in it with a live preview. It is the most highly used software for coding but it does have a difficult learning curve if you have never been exposed to coding.<br>
+                    <a href="https://brackets.io" target="_blank" rel="noopener noreferrer">
+                        <h2>BRACKETS</h2>
+                    </a> - This software is very good for beginners! It gets to the point, and also has a live preview. It's what I primarily use for basic html/css but if I want to add javascript, I'd probably just use Vscode.<br>
+
+                    <a href="https://codepen.io/pen/" target="_blank" rel="noopener noreferrer">
+                        <h2>CODEPEN</h2>
+                    </a> - This is an in browser coding editor that has a live preview and pretty good for testing stuff out! It has been useful for a lot of projects.<br><br>
+
+                    <img src="flair/divider.png" style=""><br><br>
+                    <h2>EXTRA STUFF</h2>
+
+                    Something I wasn't taught and only learned later was that there are ways to organize the directory to your website.<br><br>
+                    When you upload your files, its best to have them organized in folders and reference specific images or stylesheets WITHIN the html. For example:<br><br>
+
+                    <center> <img src="https://stuyhsdesign.files.wordpress.com/2015/09/directory-structure1.png" style="width:170px"><br></center> <br><br>
+                    Neocities already provides you with a root folder and gives you a basic index.html. An index.html is the face of your website. So you do not delete or change this. When you need to put images on your index.html, you call them from your "images" folder. <br><br>
+                    <h2>USEFUL LINKS FROM OTHER WEBSITES</h2> These are way more useful than anything here tbh, check them out!<br><br>
+
+                    - <a href="https://0shame.neocities.org/neocities.html" target="_blank" rel="noopener noreferrer">0shame.neocities.org/neocities.html</a><br>
+                    - <a href="https://sadgrl.online/webmastery/webmaster-links.html" target="_blank" rel="noopener noreferrer">sadgrl.online/webmastery/</a> <br>
+                    - <a href="https://districts.neocities.org/silicon/" target="_blank" rel="noopener noreferrer"> districts.neocities.org/silicon/</a><br><br>
+                    I'll add more when I remember...
+                    
+                    
+                    
+                    <br><br><br>
+ 
+                    </div>
+  
+
+    </body>
+</html>

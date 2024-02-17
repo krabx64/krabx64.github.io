@@ -1,0 +1,78 @@
+body {
+    background-image:url(../flair/back-137.gif);
+    background-repeat:repeat;
+    background-attachment:fixed;
+    color: grey;
+    font-family:monospace;
+    font-size:12px;
+}
+
+body a {
+    color:darkslategray;
+}
+
+.header {
+    margin:0 auto;
+    max-width:1000px;
+    font-size:15px;
+    color: darkslategrey;
+    
+}
+
+.container {
+    margin:0 auto;
+    max-width:1250px;
+    
+    height:auto;
+    display:flex;
+    
+}
+
+.tableposi {
+
+    margin:0 auto;
+    padding:10px;
+    position:fixed;
+
+   
+    
+}
+.table {
+    margin:left;
+    padding:20px;
+    margin-right:20px;
+    background-color:white;
+    width:120px;
+    height:130px;
+    font-size:11px;
+    text-decoration:underline;
+    text-align: left;
+    box-shadow: 10px 10px #D7E4EC; 
+
+    
+    
+    
+
+    
+}
+
+.mainbox{
+ 
+    padding:20px;
+    margin:0 auto;
+    margin-bottom:200px;
+    width:800px;
+    float:right;
+    height:auto;
+    background-color:white;
+    box-shadow: 10px 10px #D7E4EC ; 
+    display:flex;
+
+    
+}
+
+.maintext {
+    width:800px;
+    padding:15px;
+    color:darkslategrey;
+}
